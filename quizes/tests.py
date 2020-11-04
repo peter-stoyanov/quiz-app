@@ -8,5 +8,5 @@ from .views import quiz_page
 class QuizPageTest(TestCase):
 
     def test_guid_link_resolves_to_quiz_page_view(self):
-        found = resolve('/abcd')
+        found = resolve('/quiz/asd1289jaS')
         self.assertEqual(found.func, quiz_page)
