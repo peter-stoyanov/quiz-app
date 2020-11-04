@@ -12,7 +12,7 @@ class UserVisitTest(unittest.TestCase):
 
     def test_opens_quiz_page(self):
         # Joe har received a link to a quiz sent over from a friend
-        self.browser.get('http://localhost:3000/quiz/abcd')
+        self.browser.get('http://localhost:3000/quiz/075194d3-6885-417e-a8a8-6c931e272f00')
         self.assertIn('Quiz', self.browser.title)
 
         # Joe sees a question and reads it
