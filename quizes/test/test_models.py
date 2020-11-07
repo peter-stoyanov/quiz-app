@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 from django.urls import resolve
 
@@ -38,5 +39,6 @@ class QuizModelTest(TestCase):
         self.assertEqual(saved_quiz.uuid, saved_quiz2.uuid, 'UUID is new each time instead of persisted')
 
     def test_quiz_title_max_length(self):
-        create_quiz('This is intentionally looooooooooooooooooooong string')
-        # self.assertRaises()
+        with self.assertRaises(ValidationError):
+            create_quiz('This is intentionally looooooooooooooooooooong string')
+

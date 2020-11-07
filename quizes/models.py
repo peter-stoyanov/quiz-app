@@ -5,7 +5,7 @@ from django.db import models
 
 # Create your models here.
 class Quiz(models.Model):
-    title = models.TextField(blank=False, max_length=40)
+    title = models.CharField(blank=False, max_length=40)
     uuid = models.CharField(max_length=40, null=True, blank=True, unique=True)
 
     def __init__(self, *args, **kwargs):
