@@ -21,11 +21,13 @@ class UserVisitTest(unittest.TestCase):
         # Joe puts in a title for the whole quiz
         quiz_title_input = self.browser.find_element_by_css_selector('.quiz-title-input')
         quiz_title_input.send_keys('History quiz')
-        quiz_title_input.send_keys(Keys.ENTER)
+        quiz_form_submit_button = self.browser.find_element_by_css_selector('.quiz-submit-btn')
+        quiz_form_submit_button.click()
+        # quiz_title_input.send_keys(Keys.ENTER)
         time.sleep(1)
 
-        quiz_title = self.browser.find_element_by_css_selector('.quiz-title').text
-        self.assertIn('History quiz', quiz_title)
+        quiz_titles = self.browser.find_elements_by_class_name('quiz-title')
+        self.assertTrue(any(['History quiz' in title.text for title in quiz_titles]))
 
     # def test_opens_quiz_page(self):
     #     # Joe has received a link to a quiz sent over from a friend

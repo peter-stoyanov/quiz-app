@@ -38,6 +38,7 @@ class QuizModelTest(TestCase):
 
         self.assertEqual(saved_quiz.uuid, saved_quiz2.uuid, 'UUID is new each time instead of persisted')
 
+    # Note: this was later moved in test_forms
     def test_quiz_title_max_length(self):
         with self.assertRaises(ValidationError):
             create_quiz('This is intentionally looooooooooooooooooooong string')

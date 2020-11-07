@@ -1,7 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
+from quizes.forms import QuizForm
 from quizes.models import Quiz
 
 
@@ -11,4 +12,16 @@ def view_quiz(request, uuid):
 
 
 def create_quiz(request):
-    return render(request, 'create_quiz.html')
+    if request.method == "POST":
+        form = QuizForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/quiz/all')
+    else:
+        form = QuizForm()
+    return render(request, 'create_quiz.html', {'form': form})
+
+
+def list_quizes(request):
+    quizes = Quiz.objects.all()
+    return render(request, 'list_quizes.html', {'quizes': quizes})
