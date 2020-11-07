@@ -1,11 +1,9 @@
-from django.test import TestCase
-from django.urls import resolve
+from django.test import SimpleTestCase
 
 from quizes.forms import QuizForm
-from quizes.models import Quiz
 
 
-class QuizFormTest(TestCase):
+class QuizFormTest(SimpleTestCase):
 
     def test_form_validation_for_blank_quiz_title(self):
         form = QuizForm(data={'title': ''})

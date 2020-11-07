@@ -1,25 +1,15 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
-from django.urls import resolve
 
 from quizes.models import Quiz
-from quizes.views import view_quiz, create_quiz
-
-# helpers
-def create_quiz(title):
-    quiz = Quiz()
-    quiz.title = title
-    quiz.full_clean()
-    quiz.save()
-    return quiz
 
 
 class QuizModelTest(TestCase):
 
-    # purely integration test ?
-    # TODO: what is expected to fail here, whats the point ?
+    # Note: what is expected to fail here, whats the point - integration test ?
     def test_quiz_save_and_retrieve(self):
-        create_quiz('Hard quiz')
+        quiz = Quiz(title='Hard quiz')
+        quiz.save()
 
         quizes = Quiz.objects.all()
         self.assertEqual(quizes.count(), 1)
@@ -27,7 +17,8 @@ class QuizModelTest(TestCase):
         self.assertEqual(saved_quiz.title, 'Hard quiz')
 
     def test_quiz_has_persisted_uuid(self):
-        create_quiz('Hard quiz')
+        quiz = Quiz(title='Hard quiz')
+        quiz.save()
 
         quizes = Quiz.objects.all()
         saved_quiz = quizes[0]
@@ -38,8 +29,10 @@ class QuizModelTest(TestCase):
 
         self.assertEqual(saved_quiz.uuid, saved_quiz2.uuid, 'UUID is new each time instead of persisted')
 
-    # Note: this was later moved in test_forms
+    # Note: this was later duplicated in test_forms
     def test_quiz_title_max_length(self):
         with self.assertRaises(ValidationError):
-            create_quiz('This is intentionally looooooooooooooooooooong string')
+            quiz = Quiz(title='This is intentionally looooooooooooooooooooong string')
+            quiz.full_clean()
+            quiz.save()
 
