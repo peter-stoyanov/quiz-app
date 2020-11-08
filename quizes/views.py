@@ -6,6 +6,10 @@ from quizes.forms import QuizForm
 from quizes.models import Quiz
 
 
+def index(request):
+    return render(request, 'index.html')
+
+
 def view_quiz(request, uuid):
     quiz = get_object_or_404(Quiz, uuid=uuid)
     return render(request, 'quiz.html', {'quiz': quiz})

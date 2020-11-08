@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, SimpleTestCase
 from django.urls import resolve
 
 from http import HTTPStatus
@@ -7,7 +7,18 @@ from django.utils.html import escape
 
 from quizes.forms import QuizForm
 from quizes.models import Quiz
-from quizes.views import view_quiz, create_quiz, list_quizes
+from quizes.views import view_quiz, create_quiz, list_quizes, index
+
+
+class HomePageViewTests(SimpleTestCase):
+
+    def test_root_url_resolves_to_home_view(self):
+        found = resolve('/')
+        self.assertEqual(found.func, index)
+
+    def test_app_title_on_home_page(self):
+        response = self.client.get('/')
+        self.assertContains(response, 'Welcome to the Quiz App', html=True)
 
 
 class QuizViewTests(TestCase):

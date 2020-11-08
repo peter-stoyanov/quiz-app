@@ -22,12 +22,22 @@ class UserVisitTest(unittest.TestCase):
         quiz_title_input = self.browser.find_element_by_css_selector('.quiz-title-input')
         quiz_title_input.send_keys('History quiz')
         quiz_form_submit_button = self.browser.find_element_by_css_selector('.quiz-submit-btn')
+
+        # He submits the form
         quiz_form_submit_button.click()
-        # quiz_title_input.send_keys(Keys.ENTER)
         time.sleep(1)
 
+        # .. and sees the new title in the quiz table
         quiz_titles = self.browser.find_elements_by_class_name('quiz-title')
         self.assertTrue(any(['History quiz' in title.text for title in quiz_titles]))
+
+    def test_visit_home_page(self):
+        # Joe follow a link and finds himself on our app
+        self.browser.get('http://localhost:3000')
+        self.assertIn('Quiz', self.browser.title, 'Page title does not contain Quiz')
+
+        home_page_title = self.browser.find_element_by_class_name('app-title')
+        self.assertIn('Welcome to the Quiz App', home_page_title.text)
 
     # def test_opens_quiz_page(self):
     #     # Joe has received a link to a quiz sent over from a friend
