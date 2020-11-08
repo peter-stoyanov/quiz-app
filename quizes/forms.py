@@ -11,7 +11,7 @@ class QuizForm(forms.models.ModelForm):
         widgets = {
             'title': forms.fields.TextInput(attrs={
                 'placeholder': 'Enter a quiz title',
-                'class': 'quiz-title-input',
+                'class': 'create-quiz__title-input',
             }),
         }
         error_messages = {

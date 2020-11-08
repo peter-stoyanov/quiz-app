@@ -9,7 +9,7 @@
 
     <table id="id_list_quizes" class="table">
         {% for q in quizes %}
-            <tr><td class="quiz-title">{{ forloop.counter }}: {{ q.title }}</td></tr>
+            <tr><td class="quizes__list-item">{{ forloop.counter }}: {{ q.title }}</td></tr>
         {% endfor %}
     </table>
 
