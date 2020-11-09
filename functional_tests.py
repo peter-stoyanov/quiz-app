@@ -1,8 +1,11 @@
 from selenium import webdriver
 import unittest
 import time
+import uuid
 
-from selenium.webdriver.common.keys import Keys
+
+def generate_random_string():
+    return uuid.uuid4().hex[:8].upper()
 
 
 class UserVisitTest(unittest.TestCase):
@@ -39,16 +42,38 @@ class UserVisitTest(unittest.TestCase):
         home_page_title = self.browser.find_element_by_class_name('home__title')
         self.assertIn('Welcome to the Quiz App', home_page_title.text)
 
-    # def test_register_user(self):
-    #     # Joe liked what he saw and wants to register
-    #     self.browser.get('http://localhost:3000')
-    #
-    #     register_button = self.browser.find_element_by_class_name('home__register-btn')
-    #     register_button.click()
-    #     time.sleep(1)
-    #
-    #     register_page_title = self.browser.find_element_by_class_name('register__title')
-    #     self.assertIn('Welcome to the Quiz App', register_page_title.text)
+    def test_register_user(self):
+        # Joe liked what he saw and wants to register
+        self.browser.get('http://localhost:3000')
+
+        # Joe decides to follow the register link
+        register_link = self.browser.find_element_by_class_name('navbar__register-btn')
+        register_link.click()
+        time.sleep(1)
+
+        register_page_title = self.browser.find_element_by_class_name('register__title')
+        self.assertIn('Register', register_page_title.text)
+
+        random_password = generate_random_string()
+        random_username = generate_random_string()
+
+        # he fills in username
+        username_input = self.browser.find_element_by_css_selector('#id_username')
+        username_input.send_keys(random_username)
+
+        # and password
+        password_input = self.browser.find_element_by_css_selector('#id_password1')
+        password_input.send_keys(random_password)
+
+        confirm_password_input = self.browser.find_element_by_css_selector('#id_password2')
+        confirm_password_input.send_keys(random_password)
+
+        # when ready he submits the form
+        register_button = self.browser.find_element_by_class_name('register__submit-btn')
+        register_button.click()
+        time.sleep(1)
+
+        # and is redirected to login page
 
 
 if __name__ == '__main__':

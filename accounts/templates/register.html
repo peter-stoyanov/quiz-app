@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %} Register Account {% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h1 class="register__title">Register</h1>
+
+        <form method="POST" action="/account/register">
+            {% csrf_token %}
+
+            {% bootstrap_form form %}
+
+            {% buttons %}
+            <button type="submit" class="btn btn-primary register__submit-btn">
+                Register
+            </button>
+            {% endbuttons %}
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}
