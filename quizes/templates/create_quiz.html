@@ -3,20 +3,15 @@
 {% load bootstrap3 %}
 
 {% block title %}
-Create Quiz
+    Create Quiz
 {% endblock %}
 
 {% block content %}
+
 <h1>Create quiz</h1>
 
 <form method="POST" action="/quiz">
     {% csrf_token %}
-
-    {% if form.errors %}
-    <div class="form-group has-error">
-        <div class="help-block">{{ form.text.errors }}</div>
-    </div>
-    {% endif %}
 
     {% bootstrap_form form %}
 
