@@ -1,3 +1,0 @@
-
-# Steps
-- geckodriver in PATH
