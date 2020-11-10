@@ -46,6 +46,7 @@ class RegisterViewTests(TestCase):
 
 
 class LoginViewTests(TestCase):
+    fixtures = ['test_user.json']
 
     def test_login_url_resolves_to_login_view(self):
         found = resolve('/account/login')
@@ -62,11 +63,7 @@ class LoginViewTests(TestCase):
         self.assertIsInstance(response.context['form'], AuthenticationForm)
 
     def test_valid_post_should_login_user(self):
-        username = uuid.uuid4().hex[:8].upper()
-        password = uuid.uuid4().hex[:8].upper()
-        User.objects.create_user(username=username, password=password)
-
-        form = {'username': username, 'password': password}
+        form = {'username': 'test_user', 'password': 'test123456'}
         response = self.client.post('/account/login', data=form)
         user = auth.get_user(self.client)
 
