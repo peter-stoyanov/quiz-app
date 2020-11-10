@@ -74,6 +74,8 @@ class UserVisitTest(unittest.TestCase):
         time.sleep(1)
 
         # and is redirected to login page
+        login_page_title = self.browser.find_element_by_class_name('login__title')
+        self.assertIn('Login', login_page_title.text)
 
 
 if __name__ == '__main__':

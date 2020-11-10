@@ -27,7 +27,7 @@
                             <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
                                 Logout
                             </a>
-                            <form action="/" method="POST" id="logout">
+                            <form action="/account/logout" method="POST" id="logout">
                                 {% csrf_token %}
                                 <input type="hidden">
                             </form>
@@ -37,7 +37,7 @@
             </ul>
             {% else %}
             <div class="navbar-form navbar-right">
-                <a href="/">
+                <a href="/account/login">
                     <button class="btn btn-primary">Login</button>
                 </a>
                 <a href="/account/register">
