@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "bootstrap3",
     'quizes',
-    'accounts'
+    'accounts',
+    'budget'
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'quiz/static')
 ]
+
+# SESSION_SAVE_EVERY_REQUEST = True

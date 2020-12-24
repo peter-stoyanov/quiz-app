@@ -58,8 +58,9 @@ def session(request):
     # session_key = '8cae76c505f15432b48c8292a7dd0e54'
     #
     # session = Session.objects.get(session_key=session_key)
+    request.session.save()
     session_data = request.session
-    uid = session_data.get('_auth_user_id', 'no user id found in session')
+    # uid = session_data.get('_auth_user_id', 'no user id found in session')
     # print(uid)
     #
     # print

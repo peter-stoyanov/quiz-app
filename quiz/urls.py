@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^quiz', include('quizes.urls')),
     url(r'^account', include('accounts.urls')),
+    url(r'^budget', include('budget.urls')),
     url(r'^$', index)
 ]
 
