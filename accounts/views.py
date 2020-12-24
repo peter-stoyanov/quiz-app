@@ -1,5 +1,8 @@
+import json
+
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 
@@ -41,3 +44,26 @@ def logout(request):
         auth.logout(request)
         messages.success(request, 'You are now logged out')
     return redirect('/')
+
+
+def add_to_session(request):
+    request.session['likes'] = 9
+    return HttpResponse('added')
+
+
+def session(request):
+    from django.contrib.sessions.models import Session
+    from django.contrib.auth.models import User
+
+    # session_key = '8cae76c505f15432b48c8292a7dd0e54'
+    #
+    # session = Session.objects.get(session_key=session_key)
+    session_data = request.session
+    uid = session_data.get('_auth_user_id', 'no user id found in session')
+    # print(uid)
+    #
+    # print
+    # user.username, user.get_full_name(), user.email
+    # serialized = dict((key, value) for key, value in session_data.__dict__
+    #                   if not callable(value) and not key.startswith('__'))
+    return HttpResponse(json.dumps(session_data.__dict__['_session_cache']))
