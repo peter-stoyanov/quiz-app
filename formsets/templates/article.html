@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %}
+    All forms
+{% endblock %}
+
+{% block content %}
+
+<h1>Forms home</h1>
+
+    <form method="POST" action="/forms/article/">
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                {% bootstrap_icon "star" %} Create
+            </button>
+        {% endbuttons %}
+
+    </form>
+
+{% endblock %}
+
+

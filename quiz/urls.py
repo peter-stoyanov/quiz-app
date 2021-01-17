@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^quiz', include('quizes.urls')),
     url(r'^account', include('accounts.urls')),
     url(r'^budget', include('budget.urls')),
+    url(r'^forms', include('formsets.urls')),
     url(r'^$', index)
 ]
 
